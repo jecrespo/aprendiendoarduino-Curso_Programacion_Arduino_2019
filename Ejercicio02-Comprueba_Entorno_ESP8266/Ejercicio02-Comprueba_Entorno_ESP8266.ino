@@ -7,6 +7,11 @@
 //Librería Wifi
 #include "ESP8266WiFi.h"
 
+//Archivo de contraseñas: añade un fichero secrets.h con este contenido
+//const char* ssid = "your-ssid";
+//const char* password = "your-password";
+#include "secrets.h"
+
 //Librería Pantalla
 #include <Wire.h>
 #include <Adafruit_SSD1306.h>
@@ -28,10 +33,6 @@ Adafruit_SSD1306 display(OLED_RESET);
 
 //Objeto Leds
 Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_NUM, PIN_RGB, NEO_GRB + NEO_KHZ800);
-
-//Datos WiFi
-const char* ssid = "your-ssid";
-const char* password = "your-password";
 
 // Create an instance of the server
 WiFiServer server(80);
