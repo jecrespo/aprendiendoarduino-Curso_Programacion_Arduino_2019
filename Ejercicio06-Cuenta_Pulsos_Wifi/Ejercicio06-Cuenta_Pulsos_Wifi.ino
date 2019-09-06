@@ -34,24 +34,22 @@ void loop() {
     if (estado_b == HIGH) {  //flanco ascendente pull-down
       Serial.println(F("Pulsado boton B"));
       pulsos_b++;
-      Serial.println("Numero pulsaciones boton B: " + (String)pulsos_b);
-      int tiempo = (millis()-tiempo_pulsos)/1000;
+      Serial.println("Num. pulsaciones: " + (String)pulsos_b);
+      int tiempo = (millis()-tiempo_pulsos);
       tiempo_pulsos = millis();
-      Serial.println("Tiempo entre pulsos: " + (String)tiempo + " segundos");
+      Serial.println("Tiempo entre pulsos: " + (String)tiempo + " ms");
 
       //Imprimir en pantalla oled
       display.clearDisplay();
       display.setTextSize(1);
       display.setCursor(0, 0);
       display.setTextColor(WHITE);
-      display.print("Pulsado boton B");
-      display.setCursor(0, 15);
-      display.print("Numero pulsaciones: ");
+      display.print("Num: ");
       display.print(pulsos_b);
-      display.setCursor(0, 30);
-      display.print("Tiempo: ");
+      display.setCursor(0, 20);
+      display.print("T: ");
       display.print(tiempo);
-      display.print(" seg.");
+      display.print(" ms");
       display.display();
     }
   }
