@@ -49,24 +49,33 @@ void loop() {
       noTone(PIN_BUZZER);
       Serial.println("TEMPERATURA NORMAL");
     }
-    //Actualizar LEDs
-    switch (temp) {
-      case 27:
-        digitalWrite(PIN_LED_4, HIGH);
-      case 26:
-        digitalWrite(PIN_LED_3, HIGH);
-      case 25:
-        digitalWrite(PIN_LED_2, HIGH);
-      case 24:
-        digitalWrite(PIN_LED_1, HIGH);
-        break;
-      default:
-        digitalWrite(PIN_LED_1, LOW);
-        digitalWrite(PIN_LED_2, LOW);
-        digitalWrite(PIN_LED_3, LOW);
-        digitalWrite(PIN_LED_4, LOW);
-        break;
-    }
+  }
+  //Actualizar LEDs
+  Serial.println(temp);
+  switch (temp) {
+    case 27:
+      digitalWrite(PIN_LED_4, HIGH);
+      digitalWrite(PIN_LED_3, HIGH);
+      digitalWrite(PIN_LED_2, HIGH);
+      digitalWrite(PIN_LED_1, HIGH);
+      break;
+    case 26:
+      digitalWrite(PIN_LED_3, HIGH);
+      digitalWrite(PIN_LED_2, HIGH);
+      digitalWrite(PIN_LED_1, HIGH);
+      break;
+    case 25:
+      digitalWrite(PIN_LED_2, HIGH);
+      digitalWrite(PIN_LED_1, HIGH);
+    case 24:
+      digitalWrite(PIN_LED_1, HIGH);
+      break;
+  }
+  if (temp < 24) {
+    digitalWrite(PIN_LED_1, LOW);
+    digitalWrite(PIN_LED_2, LOW);
+    digitalWrite(PIN_LED_3, LOW);
+    digitalWrite(PIN_LED_4, LOW);
   }
 }
 
@@ -86,5 +95,6 @@ float lee_temperatura () {
     Serial.print(", Humedad:");
     Serial.println(humidity);
   }
+  delay(1500);
   return temperature;
 }
