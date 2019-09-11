@@ -21,7 +21,7 @@ void setup() {
 }
 
 void loop() {
-  duracion = pulseIn(PIN_BOTON_A, LOW, 20000000); //el programa se bloquea en este punto
+  duracion = pulseInLong(PIN_BOTON_A, LOW, 20000000); //el programa se bloquea en este punto
   Serial.println(duracion / 1000); //en milisegundos
   delay(50);
   if (duracion == 0) {
