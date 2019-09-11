@@ -23,6 +23,7 @@ void setup() {
 void loop() {
   duracion = pulseIn(PIN_BOTON_A, LOW, 20000000); //el programa se bloquea en este punto
   Serial.println(duracion / 1000); //en milisegundos
+  delay(50);
   if (duracion == 0) {
     Serial.println("pulsacion no detectada en 20 segundos");
   }
@@ -35,7 +36,7 @@ void loop() {
     }
     else {
       estado_luces = 0;
-      digitalWrite(pin_encendido, LOW)
+      digitalWrite(pin_encendido, LOW);
       Serial.println("Apago Leds");
       pin_encendido = PIN_LED_1; //inicializo el led a iluminar
     }
