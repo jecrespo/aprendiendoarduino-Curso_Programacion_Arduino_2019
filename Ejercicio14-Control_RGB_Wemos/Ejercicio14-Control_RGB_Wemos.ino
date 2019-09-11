@@ -24,10 +24,8 @@ void setup() {
   pinMode(PIN_BOTON_B, INPUT);
   anterior_b = digitalRead(PIN_BOTON_B);
 
-  //Apago leds
-  for (int i = 0; i < LED_NUM; i++) {
+  for (int i = 0; i < 7; i++)
     leds.setPixelColor(i, leds.Color(0, 0, 0));
-  }
   leds.show();
 }
 
@@ -35,11 +33,11 @@ void loop() {
   boolean estado_b = digitalRead(PIN_BOTON_B);
 
   if (anterior_b != estado_b) {
-    if (estado_b == LOW) {  //flanco ascendente pull-up
+    if (estado_b == LOW) {  //flanco descendente pull-up
       tiempo_pulsacion = millis();  //tomo timepo al pulsar
       Serial.println(F("Pulsado boton B"));
     }
-    else {  //flanco descendente
+    else {  //flanco ascendente
       unsigned long duracion_pulso = millis() - tiempo_pulsacion; //Aqui hay un bug por el millis overflow
       Serial.println("La pulsacion ha durado: " + String(duracion_pulso) + " ms.");
       if (duracion_pulso < 2000) {  //corta
@@ -76,17 +74,20 @@ void loop() {
     }
   }
   anterior_b = estado_b;
-  delay(50);
 
   //actualizo led cuando toca (200 ms)
   if (encendido) {
     if ((millis() - tiempo_led) > 200) {
+      Serial.println("Enciendo Led : " + String(led) + " Apago led: " + String(led - 1));
       tiempo_led = millis();
-      leds.setPixelColor(led - 1, leds.Color(0, 0, 0)); //OJO hay un bug
+      if (led == 1)
+        leds.setPixelColor(6, leds.Color(0, 0, 0));
+      else
+        leds.setPixelColor(led - 1, leds.Color(0, 0, 0));
       leds.setPixelColor(led, leds.Color(colores[0], colores[1], colores[2]));
       leds.show();
       led++;
-      if (led > LED_NUM)
+      if (led == 7)
         led = 1;
     }
   }
