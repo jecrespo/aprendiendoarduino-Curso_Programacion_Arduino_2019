@@ -11,7 +11,7 @@ Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_NUM, PIN_RGB, NEO_GRB + NEO_KHZ80
 
 void setup() {
   //Inicializo puerto serie
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   //Configure pulsador
   pinMode(PIN_BOTON_B, INPUT);
@@ -83,6 +83,8 @@ void iluminaLed(int num) {
     leds.setPixelColor(i, leds.Color(0, 10, 0));
     leds.show();
     delay(250);
+    if (i == num)
+      break;
     leds.setPixelColor(i, leds.Color(0, 0, 0));
     leds.show();
   }
